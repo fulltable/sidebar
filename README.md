@@ -1,13 +1,14 @@
-# Project Name
+# sidebar
 
-> Project description
+> The sidebar module for the OpenTabs FEC. The sidebar module shows the important information for each restaurant (e.g. hours, dress code, cuisines, neighborhood, etc.). There is a map with address on top, when clicked it will open a new tab with Google Maps and the
+specific address.
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/opentabs/menu
+  - https://github.com/opentabs/photo-carousel
+  - https://github.com/opentabs/reviews
+  - https://github.com/opentabs/reservation-calendar
 
 ## Table of Contents
 
@@ -17,7 +18,7 @@
 
 ## Usage
 
-> Some usage instructions
+> TBD
 
 ## Requirements
 
