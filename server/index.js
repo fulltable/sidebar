@@ -9,8 +9,11 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
-app.get('/api/restaurants/:id/sidebarInfo', (req, res) => {
-  
+app.get('/api/restaurants/:id/info', (req, res) => {
+  SidebarInfo.getSidebarInfo(req.params.id)
+    .then(info => {
+      res.send(info);
+    });
 });
 
 const server = app.listen(port, () => {
