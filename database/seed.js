@@ -12,6 +12,7 @@ const populateItems = () => {
     newItem.restaurantId = restaurantId;
     newItem.address = [faker.address.streetAddress(), faker.address.city(), faker.address.stateAbbr()].join(' ');
     newItem.neighborhood = faker.address.citySuffix();
+    newItem.neighborhood = newItem.neighborhood.charAt(0).toUpperCase() + newItem.neighborhood.slice(1);
     newItem.crossStreet = [faker.address.streetName(), faker.address.streetName()].join(' and ');
     newItem.parking = faker.lorem.sentences();
     newItem.dining = faker.commerce.productAdjective();
