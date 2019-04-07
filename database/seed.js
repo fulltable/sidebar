@@ -39,15 +39,7 @@ const populateItems = () => {
       newItem.privateFacilities = faker.lorem.sentences();
     }
 
-    sampleSidebarItems.push(newItem);
-
-  //   name: String,
-  // rating: Number,
-  // reviewCount: Number,
-  // costRange: Array,
-  // cuisine: String,
-  // tags: Array,
-  // description: String,
+    sampleSidebarItems.push(newItem); 
 
     let newOverviewItem = {};
 
