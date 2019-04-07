@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const SidebarInfo = require('../database/SidebarInfo');
+const Overview = require('../database/Overview');
 const path = require('path');
 
 const port = 3005;
@@ -15,6 +16,13 @@ app.get('/api/restaurants/:id/info', (req, res) => {
       res.send(info);
     });
 });
+
+app.get('/api/restaurants/:id/overview', (req, res) => {
+  Overview.getOverview(req.params.id)
+    .then(overview => {
+      res.send(overview);
+    })
+})
 
 const server = app.listen(port, () => {
   console.log(`Now listening on port ${port}`);
