@@ -1,8 +1,10 @@
 const SidebarInfo = require('./SidebarInfo');
+const Overview = require('./Overview');
 const faker = require('faker');
 const db = require('./index.js');
 
-const sampleItems = [];
+const sampleSidebarItems = [];
+const sampleOverviewItems = [];
 
 const populateItems = () => {
   const randRange = (min, max) => (Math.floor(Math.random() * (max + 1 - min)) + min);
@@ -37,15 +39,48 @@ const populateItems = () => {
       newItem.privateFacilities = faker.lorem.sentences();
     }
 
-    sampleItems.push(newItem);
+    sampleSidebarItems.push(newItem);
+
+  //   name: String,
+  // rating: Number,
+  // reviewCount: Number,
+  // costRange: Array,
+  // cuisine: String,
+  // tags: Array,
+  // description: String,
+
+    let newOverviewItem = {};
+
+    newOverviewItem.restaurantId = restaurantId;
+    newOverviewItem.name = faker.company.companyName();
+    newOverviewItem.rating = (Math.random() * 5).toFixed(1);
+    newOverviewItem.reviewCount = Math.floor(Math.random() * 2000);
+    const minRange = Math.floor(Math.random() * 42) + 8;
+    const maxRange = minRange + Math.floor(Math.random() * 10) + 5
+    newOverviewItem.costRange = [minRange, maxRange];
+    newOverviewItem.cuisines = newItem.cuisines[0];
+    newOverviewItem.description = faker.lorem.paragraph();
+    const tagCount = randRange(1, 3);
+    let tags = [];
+    for (let i = 0; i < tagCount; i++) {
+      tags.push(faker.commerce.productAdjective());
+    }
+    newOverviewItem.tags = tags;
+
+    sampleOverviewItems.push(newOverviewItem);
   }
 }
 
 populateItems();
 
 const insertSampleItems = () => {
-  SidebarInfo.model.create(sampleItems)
-    .then(() => db.close());
+  SidebarInfo.model.create(sampleSidebarItems)
+    .then(() => {
+      Overview.model.create(sampleOverviewItems)
+        .then(() => {
+          db.close()
+        });
+    });
 };
 
 insertSampleItems();
