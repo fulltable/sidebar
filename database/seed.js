@@ -55,7 +55,10 @@ const populateItems = () => {
     const tagCount = randRange(1, 3);
     let tags = [];
     for (let i = 0; i < tagCount; i++) {
-      tags.push(faker.commerce.productAdjective());
+      const newTag = faker.commerce.productAdjective();
+      if (tags.indexOf(newTag) < 0) {
+        tags.push(newTag);
+      }
     }
     newOverviewItem.tags = tags;
 
