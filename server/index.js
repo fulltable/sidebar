@@ -20,7 +20,11 @@ app.get('/api/restaurants/:id/info', (req, res) => {
 app.get('/api/restaurants/:id/overview', (req, res) => {
   Overview.getOverview(req.params.id)
     .then(overview => {
-      res.send(overview);
+      SidebarInfo.getSidebarInfo(req.params.id)
+        .then(info => {
+          overview.cuisine = info.cuisines.split(',')[0];
+          res.send(overview);
+        })
     })
 })
 
