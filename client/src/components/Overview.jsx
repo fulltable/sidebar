@@ -19,7 +19,11 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    this.getOverview();
+    const splitUrl = window.location.pathname.split('/');
+    const rId = Number.parseInt(splitUrl[splitUrl.length - 1]) ||  Number.parseInt(splitUrl[splitUrl.length - 2]);
+    this.setState({
+      restaurantId: rId
+    }, this.getOverview);
   }
 
   search(e) {
@@ -205,7 +209,6 @@ class Overview extends React.Component {
     return (
       this.state.restaurantLoaded &&
       <div style={styles.base}>
-        <SearchBar key={0} updateSearchText={this.search.bind(this)} />
         <div style={styles.base}>
           <div style={styles.main}>
             <div style={styles.titleContainer}>

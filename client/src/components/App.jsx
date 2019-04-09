@@ -28,7 +28,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getRestaurantInfo();
+    const splitUrl = window.location.pathname.split('/');
+    this.setState({
+      restaurantId: Number.parseInt(splitUrl[splitUrl.length - 1])
+    }, this.getRestaurantInfo());
   }
 
   search(e) {
@@ -193,7 +196,6 @@ class App extends React.Component {
     return (
       this.state.restaurantLoaded &&
       <div style={styles.base}>
-        <SearchBar updateSearchText={this.search.bind(this)} />
         <div>
           <div style={styles.container}>
             <div style={styles.boxContainer}>
