@@ -66,7 +66,7 @@ const InfoPiece = ({ title, value }) => {
     <div style={styles.container}>
       <div style={styles.main}>
         <div style={styles.iconContainer}>
-          <img style={styles.icon} src={`icons/${title}.png`}></img>
+          <img style={styles.icon} src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/${title}.png`}></img>
         </div>
         <div style={styles.textContainer}>
           <div style={styles.title}>
