@@ -39,6 +39,19 @@
 </head>
 <body>
   <div id="app"></div>
+  <div id="overview"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="bundle.js"></script>
+  <script>
+    ReactDOM.render(
+      React.createElement(Sidebar),
+      document.getElementById('app')
+    );
+    ReactDOM.render(
+      React.createElement(Overview),
+      document.getElementById('overview')
+    );
+  </script>
 </body>
 </html>

@@ -3,10 +3,12 @@ const bodyParser = require('body-parser');
 const SidebarInfo = require('../database/SidebarInfo');
 const Overview = require('../database/Overview');
 const path = require('path');
+const cors = require('cors');
 
-const port = 3005;
+const port = 3003;
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 

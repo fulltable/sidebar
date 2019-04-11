@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import InfoPiece from './InfoPiece.jsx';
-import SearchBar from './SearchBar.jsx';
 
 class App extends React.Component {
   constructor() {
@@ -29,9 +28,10 @@ class App extends React.Component {
 
   componentDidMount() {
     const splitUrl = window.location.pathname.split('/');
+    const rId = Number.parseInt(splitUrl[splitUrl.length - 1]) ||  Number.parseInt(splitUrl[splitUrl.length - 2]);
     this.setState({
-      restaurantId: Number.parseInt(splitUrl[splitUrl.length - 1])
-    }, this.getRestaurantInfo());
+      restaurantId: rId
+    }, this.getRestaurantInfo);
   }
 
   search(e) {
@@ -190,7 +190,13 @@ class App extends React.Component {
       },
       infoContainer: {
         padding: '0 .25rem',
-      }
+      },
+      map: {
+        backgroundImage: `url(https://s3-us-west-1.amazonaws.com/opentabs-sidebar/pics/staticmap.jpg)`, 
+        backgroundSize: 'contain', 
+        height: '156px',
+        margin: '0 0 1rem',
+      },
     }
 
     return (
@@ -212,7 +218,7 @@ class App extends React.Component {
                     </div>
                     <div style={styles.reservationBottomContainer}>
                       <div style={styles.reservationBottom}>
-                        <img style={styles.bookedIcon} src='icons/booked.png'></img>
+                        <img style={styles.bookedIcon} src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/booked.png`}></img>
                         <div style={styles.bookedContainer}>
                           <div style={styles.booked}>
                             Booked {Math.floor(Math.random() * 200) + 2} times today
@@ -227,7 +233,7 @@ class App extends React.Component {
             <div style={styles.mapContainer}>
               <div>
                 <a target="_blank" rel="noopener" href="//www.google.com/maps/search/?api=1&query=Maggiano's%20-%20San%20Jose%203055%20Olin%20Avenue%2C%20Suite%201000%20Suite%201000%20San%20Jose%2C%20CA%20%2095128">
-                  <div style={{backgroundImage: 'url(staticmap.jpg)', backgroundSize: 'contain', height: '156px', margin: '0 0 1rem'}}></div>
+                  <div style={styles.map}></div>
                 </a>
                 <a style={styles.address} href="//www.google.com/maps/search/?api=1&query=Maggiano's%20-%20San%20Jose%203055%20Olin%20Avenue%2C%20Suite%201000%20Suite%201000%20San%20Jose%2C%20CA%20%2095128">
                   {this.state.restaurantLoaded && (<InfoPiece key={0} title='address' value={this.state.address} />)}

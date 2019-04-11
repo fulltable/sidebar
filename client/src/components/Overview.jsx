@@ -58,7 +58,7 @@ class Overview extends React.Component {
         padding: '2rem 1rem 4rem',
         display: 'block',
         WebkitBoxDirection: 'reverse',
-        width: '640px',
+        width: '640px'
       },
       main: {
         margin: '0 0 2rem',
@@ -218,18 +218,18 @@ class Overview extends React.Component {
               <div style={styles.ratingsReviews}>
                 <div>
                   <div style={styles.redStars}>
-                    <img src='icons/redstar.png' style={styles.star}></img>
-                    <img src='icons/redstar.png' style={styles.star}></img>
-                    <img src='icons/redstar.png' style={styles.star}></img>
-                    <img src='icons/redstar.png' style={styles.star}></img>
-                    <img src='icons/redstar.png' style={styles.star}></img>
+                    <img src={'https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/redstar.png'}style={styles.star}></img>
+                    <img src={'https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/redstar.png'}style={styles.star}></img>
+                    <img src={'https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/redstar.png'}style={styles.star}></img>
+                    <img src={'https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/redstar.png'}style={styles.star}></img>
+                    <img src={'https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/redstar.png'}style={styles.star}></img>
                   </div>
                   <div style={styles.greyStars}>
-                    <img src='icons/graystar.png' style={styles.star}></img>
-                    <img src='icons/graystar.png' style={styles.star}></img>
-                    <img src='icons/graystar.png' style={styles.star}></img>
-                    <img src='icons/graystar.png' style={styles.star}></img>
-                    <img src='icons/graystar.png' style={styles.star}></img>
+                    <img src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/graystar.png`} style={styles.star}></img>
+                    <img src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/graystar.png`} style={styles.star}></img>
+                    <img src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/graystar.png`} style={styles.star}></img>
+                    <img src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/graystar.png`} style={styles.star}></img>
+                    <img src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/graystar.png`} style={styles.star}></img>
                   </div>
                 </div>
               </div>
@@ -237,15 +237,15 @@ class Overview extends React.Component {
                 <span style={styles.rating}>{this.state.rating}</span>
               </div>
               <div style={styles.statContainer}>
-                <img src='icons/reviews.png' style={styles.statIcon}></img>
+                <img src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/reviews.png`}style={styles.statIcon}></img>
                 <span style={styles.reviewLabel}>{this.state.reviewCount} reviews</span>
               </div>
               <div style={styles.statContainer}>
-                <img src='icons/cost.png' style={styles.statIcon}></img>
+                <img src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/cost.png`} style={styles.statIcon}></img>
                 <span style={styles.darkLabel}>${this.state.costRange[0]} to ${this.state.costRange[1]}</span>
               </div>
               <div style={styles.statContainer}>
-                <img src='icons/cuisines.png' style={styles.statIcon}></img>
+                <img src={`https://s3-us-west-1.amazonaws.com/opentabs-sidebar/icons/cuisines.png`} style={styles.statIcon}></img>
                 <span style={styles.darkLabel}>{this.state.cuisine}</span>
               </div>
             </div>
