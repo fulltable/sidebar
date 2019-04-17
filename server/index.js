@@ -1,38 +1,24 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const SidebarInfo = require('../database/SidebarInfo');
-const Overview = require('../database/Overview');
-const path = require('path');
-const cors = require('cors');
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
+const port = 3000
 
-const port = 3003;
-const app = express();
+const db = require('../postgresSQL/queries')
 
-app.use(cors());
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/restaurants/:id', express.static(path.join(__dirname, '/../client/dist')));
 
-app.get('/api/restaurants/:id/info', (req, res) => {
-  SidebarInfo.getSidebarInfo(req.params.id)
-    .then(info => {
-      res.send(info);
-    });
-});
 
-app.get('/api/restaurants/:id/overview', (req, res) => {
-  Overview.getOverview(req.params.id)
-    .then(overview => {
-      SidebarInfo.getSidebarInfo(req.params.id)
-        .then(info => {
-          overview.cuisine = info.cuisines.split(',')[0];
-          res.send(overview);
-        })
-    })
+app.get('/', (request, response) => {
+ response.json({ info: 'Node.js, Express, and Postgres API' })
 })
 
-const server = app.listen(port, () => {
-  console.log(`Now listening on port ${port}`);
-});
+app.get('/resturants', db.getResturants)
+app.get('/resturants/:id', db.getResturantsById)
+app.post('/resturants', db.createResturant)
+app.put('/resturants/:id', db.updateResturant)
+app.delete('/resturants/:id', db.deleteResturant)
 
-module.exports = app;
-module.exports.server = server;
+app.listen(port, () => {
+ console.log(`App running on port ${port}.`)
+})
