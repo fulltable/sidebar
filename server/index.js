@@ -9,15 +9,39 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.get('/', (request, response) => {
- response.json({ info: 'Node.js, Express, and Postgres API' })
-})
+app.get('/', (req, res) => {
+ res.json({ info: 'Node.js, Express, and Postgres API' })
+});
 
-app.get('/resturants', db.getResturants)
-app.get('/resturants/:id', db.getResturantsById)
-app.post('/resturants', db.createResturant)
-app.put('/resturants/:id', db.updateResturant)
-app.delete('/resturants/:id', db.deleteResturant)
+app.get('/resturants', (req, res) => {
+ db.getResturants((data)=>{
+  res.status(200).json(data);
+ });
+});
+
+app.get('/resturants/:id', (req, res) => {
+ db.getResturantsById(req.params.id, (data) => {
+  res.status(200).json(data);
+ });
+});
+
+app.post('/resturants', (req, res) => {
+ db.createResturant(req.body, (result) => {
+  res.status(200).send(result);
+ });
+});
+
+app.put('/resturants/:id', (req, res) => {
+ db.updateResturant(req, (result) => {
+  res.status(200).send(result);
+ });
+});
+
+app.delete('/resturants/:id', (req, res) => {
+ db.deleteResturant(req.params.id, (result) => {
+  res.status(200).send(result);
+ });
+});
 
 app.listen(port, () => {
  console.log(`App running on port ${port}.`)
