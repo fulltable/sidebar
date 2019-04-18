@@ -5,6 +5,16 @@ const pool = new Pool({
   database: 'sidebar',
   port: 5432,
 })
+const createTable = (cb) => {
+  pool.query(
+  'CREATE TABLE IF NOT EXISTS info (ID SERIAL PRIMARY KEY, address VARCHAR(1200), neighborhood VARCHAR(145), crossStreet VARCHAR(160), parking VARCHAR(480), dinning VARCHAR(150), cuisines VARCHAR(40), hours VARCHAR(40), phone VARCHAR(40), website VARCHAR(40), payment VARCHAR(40), dress VARCHAR(40), chef VARCHAR(40), catering VARCHAR(380), privateFacilities VARCHAR(380))',
+  (error, results) => {
+    if (error) {
+      throw error
+    }
+    cb('create a table info')
+  })
+}
 
 const getResturants = (cb) => {
   pool.query('SELECT * FROM info ORDER BY id ASC', (error, results) => {
@@ -61,6 +71,7 @@ const deleteResturant = (id, cb) => {
 }
 
 module.exports = {
+  createTable,
   getResturants,
   getResturantsById,
   createResturant,

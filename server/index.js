@@ -19,25 +19,25 @@ app.get('/resturants', (req, res) => {
  });
 });
 
-app.get('/resturants/:id', (req, res) => {
+app.get('api/resturants/:id', (req, res) => {
  db.getResturantsById(req.params.id, (data) => {
   res.status(200).json(data);
  });
 });
 
-app.post('/resturants', (req, res) => {
+app.post('api/resturants', (req, res) => {
  db.createResturant(req.body, (result) => {
   res.status(200).send(result);
  });
 });
 
-app.put('/resturants/:id', (req, res) => {
+app.put('api/resturants/:id', (req, res) => {
  db.updateResturant(req, (result) => {
   res.status(200).send(result);
  });
 });
 
-app.delete('/resturants/:id', (req, res) => {
+app.delete('api/resturants/:id', (req, res) => {
  db.deleteResturant(req.params.id, (result) => {
   res.status(200).send(result);
  });

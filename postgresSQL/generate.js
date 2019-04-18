@@ -1,13 +1,8 @@
 const faker = require('faker');
-const db = require('./queries.js');
 
 const populateItems = () => {
-
-  db.createTable((result)=>{
-    console.log(result)
-
   const randRange = (min, max) => (Math.floor(Math.random() * (max + 1 - min)) + min);
-  for (let restaurantId = 1; restaurantId <= 100; restaurantId += 1) {
+  for (let restaurantId = 1; restaurantId <= 10000; restaurantId += 1) {
     let newItem = {};
     newItem.address = [faker.address.streetAddress(), faker.address.city(), faker.address.stateAbbr()].join(' ');
     newItem.neighborhood = faker.address.citySuffix();
@@ -35,12 +30,8 @@ const populateItems = () => {
     if (randRange(0, 2) === 2) {
       newItem.privateFacilities = faker.lorem.sentences();
     }
-
-    db.createResturant(newItem, (result)=>{
-     console.log(result);
-    }); 
+    console.log(newItem);
    }
-  });
   }
 
   populateItems();
