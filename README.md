@@ -22,22 +22,22 @@ The sidebar module has the following functions:
 1. Add a resturant - (CREATE)
 It is possible to add a resturant. Admin or user can post a new resturant.
 
-POST - /api/resturant/
+      POST - /api/resturant/
 
 2. Get all resturant info per accommodation - (READ)
 The components can retrieve the resturant detailed info from the database for a specific accommodation
 
-GET - /api/resturant/:accommodationid
+      GET - /api/resturant/:accommodationid
 
 3. Potentially update booked dates after booking is reserved - (UPDATE)
 The components can update the booked dates from the database for a specific accommodation
 
-PUT - /api/resturant/:accommodationid
+      PUT - /api/resturant/:accommodationid
 
 4. Potentially delete the closed resturants or any special case (DELETE)
 The components can delete the resturant data from the database for a specific accommodation
 
-DELETE - /api/resturant/:accommodationid
+      DELETE - /api/resturant/:accommodationid
 
 ## Requirements
 
