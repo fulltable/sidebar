@@ -2,8 +2,9 @@ const faker = require('faker');
 
 const populateItems = () => {
   const randRange = (min, max) => (Math.floor(Math.random() * (max + 1 - min)) + min);
-  for (let restaurantId = 1; restaurantId <= 10000; restaurantId += 1) {
+  for (let restaurantId = 1; restaurantId <= 1000; restaurantId += 1) {
     let newItem = {};
+    newItem.restaurantId = restaurantId;
     newItem.address = [faker.address.streetAddress(), faker.address.city(), faker.address.stateAbbr()].join(' ');
     newItem.neighborhood = faker.address.citySuffix();
     newItem.neighborhood = newItem.neighborhood.charAt(0).toUpperCase() + newItem.neighborhood.slice(1);
@@ -32,6 +33,6 @@ const populateItems = () => {
     }
     console.log(newItem);
    }
-  }
+}
 
   populateItems();

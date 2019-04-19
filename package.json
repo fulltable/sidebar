@@ -16,9 +16,13 @@
     "db:setup": "node database/seed.js"
   },
   "dependencies": {
+    "async": "^2.6.2",
     "axios": "^0.18.0",
+    "cassandra-driver": "^4.0.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "file-system": "^2.2.2",
+    "increase-memory-limit": "^1.0.6",
     "mongoose": "^5.4.21",
     "pg": "^7.10.0"
   },
