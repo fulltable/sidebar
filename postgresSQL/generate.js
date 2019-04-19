@@ -1,13 +1,14 @@
 const faker = require('faker');
-// const fs = require('fs');
-// const fastcsv = require('fast-csv'); 
-const ws = fs.createWriteStream("out.csv"); 
+const fs = require('fs');
+const fastcsv = require('fast-csv'); 
+const ws = fs.createWriteStream("data.csv"); 
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;  
 
 const populateItems = (num) => {
   const randRange = (min, max) => (Math.floor(Math.random() * (max + 1 - min)) + min);
-  for (let restaurantId = 1; restaurantId <= 2000000; restaurantId += 1) {
+  for (let restaurantId = 1; restaurantId <= 100000; restaurantId += 1) {
     let newItem = {};
-    newItem.restaurantId = restaurantId + num;
+    newItem.restaurantId = num;
     newItem.address = [faker.address.streetAddress(), faker.address.city(), faker.address.stateAbbr()].join(' ');
     newItem.neighborhood = faker.address.citySuffix();
     newItem.neighborhood = newItem.neighborhood.charAt(0).toUpperCase() + newItem.neighborhood.slice(1);
@@ -30,54 +31,48 @@ const populateItems = (num) => {
 
     if (randRange(0, 2) === 2) {
       newItem.catering = faker.lorem.sentences();
+    } else {
+      newItem.catering = 'N/A'
     }
     if (randRange(0, 2) === 2) {
       newItem.privateFacilities = faker.lorem.sentences();
+    } else {
+      newItem.privateFacilities = 'N/A'
+    }
+    // return data
+    data = [];
+    for (var prop in newItem) {
+      data.push(newItem[prop])
     }
 
-    let data = [
-      {
-        restaurantId: newItem.restaurantId,
-        address: newItem.address,
-        neighborhood: newItem.neighborhood,
-        crossStreet: newItem.crossStreet,
-        parking: newItem.parking,
-        dining: newItem.dining,
-        cuisines: newItem.cuisines,
-        hours: newItem.hours,
-        phone: newItem.phone,
-        website: newItem.website,
-        payment: newItem.payment,
-        dress: newItem.dress,
-        chef: newItem.chef,
-        catering: newItem.catering,
-        privateFacilities: newItem.privateFacilities
-      }
-    ]
-    // return data
-    console.log(newItem);
-   }
+    // console.log(JSON.stringify(newItem));
+    return data.join('@') + '\n'
+  }
 }
 
-populateItems()
+// populateItems();
+// for(let i = 1; i <= 2000000; i += 100000){
+//   setTimeout(() => {populateItems(i)}, 10000)
+// }
 
-function writeOneMillionTimes(writer, data, encoding, callback) {
-  var i = 10;
+function writeOneMillionTimes(writer, data, encoding, callback, n) {
+  var i = n;
   write();
   function write() {
     var ok = true;
     do {
       i -= 1;
-      if (i === 0) {
+      if (i === 1) {
         // last time!
-        writer.write(data, encoding, callback);
+        writer.write(data(i), encoding, callback);
+        callback('done')
       } else {
         // see if we should continue, or wait
         // don't pass the callback, because we're not done yet.
-        ok = writer.write(data, encoding);
+        ok = writer.write(data(i), encoding);
       }
-    } while (i > 0 && ok);
-    if (i > 0) {
+    } while (i > 1 && ok);
+    if (i > 1) {
       // had to stop early!
       // write some more once it drains
       writer.once('drain', write);
@@ -85,5 +80,4 @@ function writeOneMillionTimes(writer, data, encoding, callback) {
   }
 }
 
-// writeOneMillionTimes(fastcsv, populateItems());
-
+writeOneMillionTimes(ws, populateItems, 'UTF-8' ,(result)=>console.log(result), 10000001);

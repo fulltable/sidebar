@@ -27,6 +27,7 @@ const getResturants = (cb) => {
 
 const getResturantsById = (id, cb) => {
   pool.query('SELECT * FROM info WHERE id = $1', [id], (error, results) => {
+    console.log(id);
     if (error) {
       throw error
     }
@@ -36,7 +37,6 @@ const getResturantsById = (id, cb) => {
 
 const createResturant = (req, cb) => {
   const { address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities } = req
-
   pool.query('INSERT INTO info (address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)', [address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities], (error, results) => {
     if (error) {
       throw error
