@@ -1,44 +1,43 @@
 const faker = require('faker');
 const fs = require('fs');
 const fastcsv = require('fast-csv'); 
-const ws = fs.createWriteStream("data.csv"); 
+const ws = fs.createWriteStream("sidebar.csv"); 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;  
 
 const populateItems = (num) => {
   const randRange = (min, max) => (Math.floor(Math.random() * (max + 1 - min)) + min);
-  for (let restaurantId = 1; restaurantId <= 100000; restaurantId += 1) {
+  // for (let restaurantId = 1; restaurantId <= 100000; restaurantId += 1) {
     let newItem = {};
     newItem.restaurantId = num;
     newItem.address = [faker.address.streetAddress(), faker.address.city(), faker.address.stateAbbr()].join(' ');
-    newItem.neighborhood = faker.address.citySuffix();
-    newItem.neighborhood = newItem.neighborhood.charAt(0).toUpperCase() + newItem.neighborhood.slice(1);
+    if (randRange(0, 2) === 2) {
+      newItem.catering = faker.lorem.sentences();
+    } else {
+      newItem.catering = 'N/A'
+    }
+    newItem.chef = faker.name.findName();
     newItem.crossStreet = [faker.address.streetName(), faker.address.streetName()].join(' and ');
-    newItem.parking = faker.lorem.sentences();
-    newItem.dining = faker.commerce.productAdjective();
-
     const cuisineCount = randRange(1, 3);
     let cuisines = [];
     for (let i = 0; i < cuisineCount; i++) {
       cuisines.push(faker.commerce.productMaterial());
     }
     newItem.cuisines = cuisines.join(', ');
-    newItem.hours = 'Monday - Friday, ' + randRange(1, 12) + ':00am - ' + randRange(1, 12) + ':00pm';
-    newItem.phone = faker.phone.phoneNumber();
-    newItem.website = faker.internet.url();
-    newItem.payment = 'Visa, Discover, MasterCard';
+    newItem.dining = faker.commerce.productAdjective();
     newItem.dress = [faker.commerce.productAdjective(), faker.commerce.productMaterial()].join(' ');
-    newItem.chef = faker.name.findName();
-
-    if (randRange(0, 2) === 2) {
-      newItem.catering = faker.lorem.sentences();
-    } else {
-      newItem.catering = 'N/A'
-    }
+    newItem.hours = 'Monday - Friday, ' + randRange(1, 12) + ':00am - ' + randRange(1, 12) + ':00pm';
+    newItem.neighborhood = faker.address.citySuffix();
+    newItem.neighborhood = newItem.neighborhood.charAt(0).toUpperCase() + newItem.neighborhood.slice(1);
+    newItem.parking = faker.lorem.sentences();
+    newItem.payment = 'Visa, Discover, MasterCard';
+    newItem.phone = faker.phone.phoneNumber();
     if (randRange(0, 2) === 2) {
       newItem.privateFacilities = faker.lorem.sentences();
     } else {
       newItem.privateFacilities = 'N/A'
     }
+    newItem.website = faker.internet.url();
+
     // return data
     data = [];
     for (var prop in newItem) {
@@ -48,7 +47,7 @@ const populateItems = (num) => {
     // console.log(JSON.stringify(newItem));
     return data.join('@') + '\n'
   }
-}
+// }
 
 // populateItems();
 // for(let i = 1; i <= 2000000; i += 100000){
@@ -81,3 +80,4 @@ function writeOneMillionTimes(writer, data, encoding, callback, n) {
 }
 
 writeOneMillionTimes(ws, populateItems, 'UTF-8' ,(result)=>console.log(result), 10000001);
+
