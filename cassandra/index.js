@@ -12,33 +12,33 @@ client.connect(function(err, result){
   console.log('index: cassandra connected');
 });
 
-const getAllResturants = 'select * from sidebar';
-const getSelectedResturant = 'select * from sidebar where id = ?'
-const postResturant = 'INSERT INTO sidebar (id, address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-const updateResturant = 'UPDATE sidebar SET address = ?, neighborhood = ?, crossStreet = ?, parking = ?, dinning = ?, cuisines = ?, hours = ?, phone = ?, website = ?, payment = ?, dress = ?, chef = ?, catering = ?, privateFacilities = ? WHERE id = ?';
-const deleteResturant = 'DELETE from sidebar where id = ?'
+const getAllSidebar = 'select * from sidebar';
+const getSelectedSidebar = 'select * from sidebar where id = ?'
+const postSidebar = 'INSERT INTO sidebar (id, address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+const updateSidebar = 'UPDATE sidebar SET address = ?, neighborhood = ?, crossStreet = ?, parking = ?, dinning = ?, cuisines = ?, hours = ?, phone = ?, website = ?, payment = ?, dress = ?, chef = ?, catering = ?, privateFacilities = ? WHERE id = ?';
+const deleteSidebar = 'DELETE from sidebar where id = ?'
 
-app.get('/api/resturants', (req, res) => {
- client.execute(getAllResturants, (err, result)=>{
-   if(err){
-    res.status(404).send(err);
-   } 
-   res.status(200).json(result.rows);
- });
-});
+// app.get('/api/resturants', (req, res) => {
+//  client.execute(getAllResturants, (err, result)=>{
+//    if(err){
+//     res.status(404).send(err);
+//    } 
+//    res.status(200).json(result.rows);
+//  });
+// });
 
-app.get('/api/resturants/:id', (req, res) => {
- client.execute(getSelectedResturant, [req.params.id], { prepare : true }, (err, result)=>{
+app.get('/api/sidebar/:id', (req, res) => {
+ client.execute(getSelectedSidebar, [req.params.id], { prepare : true }, (err, result)=>{
   if(err){
    res.status(404).send(err);
   } 
-  res.status(200).json(result.rows);
+  res.status(200).json(result.rows[0]);
  });
 });
 
-app.post('/api/resturants', (req,res)=>{
+app.post('/api/sidebar', (req,res)=>{
  const { id, address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities } = req.body;
- client.execute(postResturant, [id, address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities], { prepare : true }, (error, results) => {
+ client.execute(postSidebar, [id, address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities], { prepare : true }, (error, results) => {
   if (error) {
     throw error
   }
@@ -46,9 +46,9 @@ app.post('/api/resturants', (req,res)=>{
  });
 });
 
-app.put('/api/resturants/:id', (req,res)=>{
+app.put('/api/sidebar/:id', (req,res)=>{
  const { id, address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities } = req.body;
- client.execute(updateResturant, [address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities, id], { prepare : true }, (error, results) => {
+ client.execute(updateSidebar, [address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities, id], { prepare : true }, (error, results) => {
   if (error) {
     throw error
   }
@@ -56,8 +56,8 @@ app.put('/api/resturants/:id', (req,res)=>{
  });
 });
 
-app.delete('/api/resturants/:id', (req,res)=>{
- client.execute(deleteResturant, [req.params.id], { prepare : true }, (error, results) => {
+app.delete('/api/sidebar/:id', (req,res)=>{
+ client.execute(deleteSidebar, [req.params.id], { prepare : true }, (error, results) => {
   if (error) {
    throw error
   }
