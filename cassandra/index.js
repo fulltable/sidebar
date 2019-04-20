@@ -12,11 +12,14 @@ client.connect(function(err, result){
   console.log('index: cassandra connected');
 });
 
-const getAllSidebar = 'select * from sidebar';
+// const getAllSidebar = 'select * from sidebar';
 const getSelectedSidebar = 'select * from sidebar where id = ?'
 const postSidebar = 'INSERT INTO sidebar (id, address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
 const updateSidebar = 'UPDATE sidebar SET address = ?, neighborhood = ?, crossStreet = ?, parking = ?, dinning = ?, cuisines = ?, hours = ?, phone = ?, website = ?, payment = ?, dress = ?, chef = ?, catering = ?, privateFacilities = ? WHERE id = ?';
 const deleteSidebar = 'DELETE from sidebar where id = ?'
+
+const getSelectedOverview = 'select * from overview where id = ?'
+const updateSelectedOverview = 'UPDATE overview SET costrange = ?, description = ?, name = ?, rating = ?, reviewcount = ?, tags = ? WHERE id = ?'
 
 // app.get('/api/resturants', (req, res) => {
 //  client.execute(getAllResturants, (err, result)=>{
@@ -42,7 +45,7 @@ app.post('/api/sidebar', (req,res)=>{
   if (error) {
     throw error
   }
-  res.status(200).json('Success add a new resturant'); 
+  res.status(200).json('Success add a new resturant sidebar'); 
  });
 });
 
@@ -65,6 +68,26 @@ app.delete('/api/sidebar/:id', (req,res)=>{
  });
 });
 
+app.get('/api/overview/:id', (req, res) => {
+  client.execute(getSelectedOverview, [req.params.id], { prepare : true }, (err, result)=>{
+   if(err){
+    res.status(404).send(err);
+   } 
+   res.status(200).json(result.rows[0]);
+  });
+ });
+
+ app.put('/api/overview/:id', (req,res)=>{
+  const { id, costrange, description, name, rating, reviewcount, tags } = req.body;
+  client.execute(updateSelectedOverview, [costrange, description, name, rating, reviewcount, tags, id], { prepare : true }, (error, results) => {
+   if (error) {
+     throw error
+   }
+   res.status(200).json('Successful update'); 
+  });
+ });
+
+ 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
