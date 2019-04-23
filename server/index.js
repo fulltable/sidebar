@@ -39,7 +39,7 @@ app.delete('/api/sidebar/:id', (req, res) => {
 
 app.get('/api/overview/:id', (req, res) => {
  db.getOverviewById(req.params.id, (data) => {
-  res.status(200).json(data[0]);
+  res.status(200).json(data);
  });
 });
 

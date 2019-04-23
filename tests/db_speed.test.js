@@ -17,7 +17,7 @@ let cqlDone = false;
 function cqlSpeedTest(cb){
  let totalMS = 0;
  let counter = 0;
- for(let i = 0; i < 10; i++){
+ for(let i = 0; i < 200; i++){
   let random = getRandomInt(10000000);
    let start = now().toFixed(3);
    client.execute(getSelectedSidebar, [random], { prepare : true }, (err, result)=>{
@@ -27,7 +27,7 @@ function cqlSpeedTest(cb){
      let end = now().toFixed(3);
      totalMS += (end - start);
      counter += 1;
-     if(counter === 10){
+     if(counter === 200){
       cb('Total spend of Csql time is ' + totalMS + 'milliseconds')
      }
    });
@@ -37,28 +37,39 @@ function cqlSpeedTest(cb){
 function PGSpeedTest(cb){
  let totalMS = 0;
  let counter = 0;
-  for(let i = 0; i < 10; i++){
+  for(let i = 0; i < 200; i++){
     let random = getRandomInt(10000000);
     let start = now().toFixed(3);
      pgDB.getSidebarById(random, (result)=>{
       let end = now().toFixed(3);
       totalMS += (end - start);
       counter += 1;
-      if(counter === 10){
+      if(counter === 200){
        cb('Total spend of PG time is ' + totalMS + 'milliseconds')
       }
     });
   }
 }
 
-for(let i = 0; i < 3; i++){
- setTimeout(()=>{cqlSpeedTest((result)=>{console.log(result)}, 500)});
- i === 2 ? cqlDone = true : null;
-}
+// cqlSpeedTest((result)=>{
+//   console.log(result)
+//   cqlSpeedTest((result)=>{
+//     console.log(result)
+//     cqlSpeedTest((result)=>{
+//       console.log(result)
+//       cqlDone = true;
+//     });
+//   });
+// });
 
-if (cqlDone === true) {
-  for (let i = 0; i < 3; i++){
-   setTimeout(()=>{PGSpeedTest((result)=>{console.log(result)}, 500)});
-  }
-}
+PGSpeedTest((result)=>{
+  console.log(result)
+  PGSpeedTest((result)=>{
+    console.log(result)
+    PGSpeedTest((result)=>{
+      console.log(result)
+    });
+  });
+});
+
 

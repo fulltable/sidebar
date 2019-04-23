@@ -26,7 +26,7 @@ const pool = new Pool({
 // }
 
 const getSidebarById = (id, cb) => {
-  pool.query('SELECT * FROM sidebar WHERE id = $1', [id], (error, results) => {
+  pool.query('SELECT * FROM sidebar where id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -70,14 +70,16 @@ const deleteSidebar = (id, cb) => {
 }
 
 const getOverviewById = (id, cb) => {
-  console.log(id)
-  pool.query('SELECT * FROM overview WHERE id = $1', [id], (error, results) => {
+  // pool.query('SELECT * FROM overview where ')
+  pool.query('select sidebar.cuisines, overview.* from sidebar join overview on overview.id = sidebar.id where overview.id = $1',[id] ,(error, results) => {
     if (error) {
       throw error
     }
-    cb(results.rows);
+    console.log(results)
+    cb(results);
   })
 }
+  // pool.query('SELECT * FROM sidebar join overview on overview.id = sidebar.id WHERE sidebar.id = $1', [id], (error, results) => {
 
 
 const createOverview = (req, cb) => {

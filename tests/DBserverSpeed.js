@@ -9,7 +9,6 @@ app.use(bodyParser.json());
 
 const pgURL = request('http://localhost:3000');
 const cURL = request('http://localhost:3001');
-let pgDone = false;
 
 function getRandomInt(max) {
  return Math.floor(Math.random() * Math.floor(max));
