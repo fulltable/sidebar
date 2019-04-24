@@ -17,7 +17,7 @@ function getRandomInt(max) {
 function PGserverTest(table, cb){
   let totalMS = 0;
   let counter = 0;
-    for(let i = 0; i < 100; i++){
+    for(let i = 0; i < 200; i++){
       let start = now().toFixed(3);
       let random = getRandomInt(10000000);
       pgURL
@@ -39,7 +39,7 @@ function PGserverTest(table, cb){
 function CsqlServerTest(table, cb){
   let totalMS = 0;
   let counter = 0;
-    for(let i = 0; i < 100; i++){
+    for(let i = 0; i < 200; i++){
       let start = now().toFixed(3);
       let random = getRandomInt(10000000);
       cURL
@@ -60,10 +60,10 @@ function CsqlServerTest(table, cb){
 
 PGserverTest('sidebar', (result)=>{
   console.log(result);
-  PGserverTest('overview', (result)=>{
-    console.log(result)
-    CsqlServerTest('sidebar', (result)=>{
-      console.log(result);
+  CsqlServerTest('sidebar', (result)=>{
+    console.log(result);
+    PGserverTest('overview', (result)=>{
+      console.log(result)
       CsqlServerTest('overview', (result)=>{
         console.log(result)
       })

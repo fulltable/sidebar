@@ -8,7 +8,6 @@ const db = require('../postgresSQL/queries')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.get('/', (req, res) => {
  res.json({ info: 'Node.js, Express, and Postgres API' })
 });

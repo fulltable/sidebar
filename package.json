@@ -16,6 +16,7 @@
     "db:setup": "node database/seed.js"
   },
   "dependencies": {
+    "artillery": "^1.6.0-27",
     "async": "^2.6.2",
     "axios": "^0.18.0",
     "cassandra-driver": "^4.0.0",

@@ -11,16 +11,16 @@ function getRandomInt(max) {
  return Math.floor(Math.random() * Math.floor(max));
 }
 
-const getSelectedSidebar = 'select * from sidebar where id = ?'
-let cqlDone = false;
+const getSelectedSidebar = 'select * from sidebar where id = ?';
+const getSelectedOverview = 'select * from overview where id = ?';
 
-function cqlSpeedTest(cb){
+function cqlSpeedTest(method, cb){
  let totalMS = 0;
  let counter = 0;
  for(let i = 0; i < 200; i++){
   let random = getRandomInt(10000000);
    let start = now().toFixed(3);
-   client.execute(getSelectedSidebar, [random], { prepare : true }, (err, result)=>{
+   client.execute(method, [random], { prepare : true }, (err, result)=>{
      if(err){
        console.log(err, 'error')
      } 
@@ -51,11 +51,37 @@ function PGSpeedTest(cb){
   }
 }
 
-// cqlSpeedTest((result)=>{
+function PGSpeedTest(cb){
+  let totalMS = 0;
+  let counter = 0;
+   for(let i = 0; i < 200; i++){
+     let random = getRandomInt(10000000);
+     let start = now().toFixed(3);
+      pgDB.getOverviewById(random, (result)=>{
+       let end = now().toFixed(3);
+       totalMS += (end - start);
+       counter += 1;
+       if(counter === 200){
+        cb('Total spend of PG time is ' + totalMS + 'milliseconds')
+       }
+     });
+   }
+ }
+// cqlSpeedTest(getSelectedSidebar, (result)=>{
 //   console.log(result)
-//   cqlSpeedTest((result)=>{
+//   cqlSpeedTest(getSelectedSidebar, (result)=>{
 //     console.log(result)
-//     cqlSpeedTest((result)=>{
+//     cqlSpeedTest(getSelectedSidebar, (result)=>{
+//       console.log(result)
+//     });
+//   });
+// });
+
+// cqlSpeedTest(getSelectedOverview, (result)=>{
+//   console.log(result)
+//   cqlSpeedTest(getSelectedOverview, (result)=>{
+//     console.log(result)
+//     cqlSpeedTest(getSelectedOverview, (result)=>{
 //       console.log(result)
 //       cqlDone = true;
 //     });

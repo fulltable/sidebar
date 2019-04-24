@@ -2,7 +2,7 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'garyguan',
   host: 'localhost',
-  database: 'sidebar',
+  database: 'postgres',
   port: 5432,
 })
 // const createTable = (cb) => {
@@ -48,8 +48,7 @@ const updateSidebar = (req, cb) => {
   const id = parseInt(req.params.id)
   const { address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities } = req
 
-  pool.query(
-    'UPDATE sidebar SET address = $1, neighborhood = $2, crossStreet = $3, parking = $4, dinning = $5, cuisines = $6, hours=$7, phone=$8, website=$9, payment=$10, dress=$11, chef=$12, catering=$13, privateFacilities=$14 WHERE id = $15',
+  pool.query('UPDATE sidebar SET address = $1, neighborhood = $2, crossStreet = $3, parking = $4, dinning = $5, cuisines = $6, hours=$7, phone=$8, website=$9, payment=$10, dress=$11, chef=$12, catering=$13, privateFacilities=$14 WHERE id = $15',
     [address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities, id],
     (error, results) => {
       if (error) {
@@ -70,17 +69,14 @@ const deleteSidebar = (id, cb) => {
 }
 
 const getOverviewById = (id, cb) => {
-  // pool.query('SELECT * FROM overview where ')
-  pool.query('select sidebar.cuisines, overview.* from sidebar join overview on overview.id = sidebar.id where overview.id = $1',[id] ,(error, results) => {
+  pool.query('SELECT overview.*, sidebar.cuisines FROM overview join sidebar on sidebar.id = overview.id where overview.id = $1', [id],(error, results) => {
     if (error) {
       throw error
     }
-    console.log(results)
-    cb(results);
+    cb(results.rows);
   })
 }
   // pool.query('SELECT * FROM sidebar join overview on overview.id = sidebar.id WHERE sidebar.id = $1', [id], (error, results) => {
-
 
 const createOverview = (req, cb) => {
   const { address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities } = req
