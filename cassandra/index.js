@@ -21,15 +21,6 @@ const deleteSidebar = 'DELETE from sidebar where id = ?'
 const getSelectedOverview = 'select * from overview where id = ?'
 const updateSelectedOverview = 'UPDATE overview SET costrange = ?, description = ?, name = ?, rating = ?, reviewcount = ?, tags = ? WHERE id = ?'
 
-// app.get('/api/resturants', (req, res) => {
-//  client.execute(getAllResturants, (err, result)=>{
-//    if(err){
-//     res.status(404).send(err);
-//    } 
-//    res.status(200).json(result.rows);
-//  });
-// });
-
 app.get('/api/sidebar/:id', (req, res) => {
  client.execute(getSelectedSidebar, [req.params.id], { prepare : true }, (err, result)=>{
   if(err){
