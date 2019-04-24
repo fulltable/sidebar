@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
+const db = require('../postgresSQL/queries')
 
 const Pool = require('pg').Pool
 const pool = new Pool({
@@ -12,22 +13,19 @@ const pool = new Pool({
   port: 5432,
 })
 
-const getOverviewById = (id, cb) => {
- pool.query('SELECT * FROM overview where id = $1', [id], (error, results) => {
-   if (error) {
-     throw error
-   }
-   cb(results.rows);
- })
-}
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/api/sidebar/:id', (req, res) => {
+  db.getSidebarById(req.params.id, (data) => {
+    res.status(200).json(data[0]);
+  });
+});
+
 app.get('/api/overview/:id', (req, res) => {
- getOverviewById(req.params.id, (data) => {
-  res.status(200).json(data[0]);
- });
+  db.getOverviewById(req.params.id, (data) => {
+    res.status(200).json(data[0]);
+  });
 });
 
 app.listen(port, () => {
