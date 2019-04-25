@@ -1,8 +1,8 @@
 config:
-  target: 'http://localhost:3001'
+  target: 'http://localhost:3000'
   phases:
     - duration: 30
-      arrivalRate: 540
+      arrivalRate: 550
   processor: "./stressFunction.js"
 scenarios:
   - flow:

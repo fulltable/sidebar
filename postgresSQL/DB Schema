@@ -1,0 +1,29 @@
+CREATE Table IF NOT EXISTS sidebar (
+  ID SERIAL PRIMARY KEY,
+  restaurantId Int, 
+  address VARCHAR,
+  catering VARCHAR,
+  chef VARCHAR,
+  crossStreet VARCHAR(160),
+  cuisines VARCHAR(40),
+  dinning VARCHAR(150),
+  dress VARCHAR(40),
+  hours VARCHAR(40),
+  neighborhood VARCHAR(145),
+  parking VARCHAR,
+  payment VARCHAR(40),
+  phone VARCHAR(40),
+  privateFacilities VARCHAR,
+  website VARCHAR(40)
+);
+
+CREATE TABLE overview ( 
+  ID SERIAL PRIMARY KEY, 
+  restaurantId Int, 
+  costRange VARCHAR, 
+  description VARCHAR, 
+  name VARCHAR, 
+  rating VARCHAR, 
+  reviewCount VARCHAR, 
+  tags VARCHAR
+);

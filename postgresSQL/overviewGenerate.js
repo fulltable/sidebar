@@ -5,6 +5,7 @@ const ws = fs.createWriteStream("overview.csv");
 const populateOverview = (num) => {
  const randRange = (min, max) => (Math.floor(Math.random() * (max + 1 - min)) + min);
    let newOverviewItem = {};
+   newOverviewItem.id = num;
    newOverviewItem.restaurantId = num;
    const minRange = Math.floor(Math.random() * 42) + 8;
    const maxRange = minRange + Math.floor(Math.random() * 10) + 5

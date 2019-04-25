@@ -11,6 +11,7 @@ const pool = new Pool({
   database: 'sidebar',
   password: 'a81884855',
   port: 5432,
+  agent: false
 })
 
 app.use(bodyParser.json())
