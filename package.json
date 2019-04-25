@@ -28,6 +28,7 @@
     "file-system": "^2.2.2",
     "mongoose": "^5.4.21",
     "mysql2": "^1.6.5",
+    "nodemon": "^1.18.11",
     "performance-now": "^2.1.0",
     "pg": "^7.10.0",
     "promise-mysql": "^3.3.1"

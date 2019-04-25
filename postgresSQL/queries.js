@@ -1,10 +1,21 @@
+// const Pool = require('pg').Pool
+// const pool = new Pool({
+//   user: 'garyguan',
+//   host: 'localhost',
+//   database: 'postgres',
+//   port: 5432,
+// })
+
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'garyguan',
-  host: 'localhost',
-  database: 'postgres',
+  user: 'postgres',
+  host: 'ec2-13-57-188-124.us-west-1.compute.amazonaws.com',
+  database: 'sidebar',
+  password: 'a81884855',
   port: 5432,
+  agent: false
 })
+
 // const createTable = (cb) => {
 //   pool.query(
 //   'CREATE TABLE IF NOT EXISTS info (ID SERIAL PRIMARY KEY, address VARCHAR(1200), neighborhood VARCHAR(145), crossStreet VARCHAR(160), parking VARCHAR(480), dinning VARCHAR(150), cuisines VARCHAR(40), hours VARCHAR(40), phone VARCHAR(40), website VARCHAR(40), payment VARCHAR(40), dress VARCHAR(40), chef VARCHAR(40), catering VARCHAR(380), privateFacilities VARCHAR(380))',
@@ -69,7 +80,7 @@ const deleteSidebar = (id, cb) => {
 }
 
 const getOverviewById = (id, cb) => {
-  pool.query('SELECT overview.*, sidebar.cuisines FROM overview join sidebar on sidebar.id = overview.id where overview.id = $1', [id],(error, results) => {
+  pool.query('SELECT * FROM overview where id = $1', [id],(error, results) => {
     if (error) {
       throw error
     }
