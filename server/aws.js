@@ -7,7 +7,7 @@ const db = require('../postgresSQL/queries')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (res, req) => {
+app.get('/', (req, res) => {
   res.status(200).send('Cool! You connect to AWS EC2')
 })
 
