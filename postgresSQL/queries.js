@@ -1,20 +1,20 @@
-// const Pool = require('pg').Pool
-// const pool = new Pool({
-//   user: 'garyguan',
-//   host: 'localhost',
-//   database: 'postgres',
-//   port: 5432,
-// })
-
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'postgres',
-  host: 'ec2-13-57-188-124.us-west-1.compute.amazonaws.com',
-  database: 'sidebar',
-  password: 'a81884855',
+  user: 'garyguan',
+  host: 'localhost',
+  database: 'postgres',
   port: 5432,
-  agent: false
 })
+
+// const Pool = require('pg').Pool
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'ec2-13-57-188-124.us-west-1.compute.amazonaws.com',
+//   database: 'sidebar',
+//   password: 'a81884855',
+//   port: 5432,
+//   agent: false
+// })
 
 // const createTable = (cb) => {
 //   pool.query(
