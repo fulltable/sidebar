@@ -8,7 +8,7 @@ const populateItems = (num) => {
   const randRange = (min, max) => (Math.floor(Math.random() * (max + 1 - min)) + min);
   // for (let restaurantId = 1; restaurantId <= 100000; restaurantId += 1) {
     let newItem = {};
-    newItem.id = num;
+    newItem._id = num;
     newItem.restaurantId = num;
     newItem.address = [faker.address.streetAddress(), faker.address.city(), faker.address.stateAbbr()].join(' ');
     if (randRange(0, 2) === 2) {
@@ -80,5 +80,5 @@ function writeOneMillionTimes(writer, data, encoding, callback, n) {
   }
 }
 
-writeOneMillionTimes(ws, populateItems, 'UTF-8' ,(result)=>console.log(result), 10000001);
+writeOneMillionTimes(ws, populateItems, 'UTF-8' ,(result)=>console.log(result), 101);
 

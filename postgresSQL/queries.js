@@ -37,7 +37,7 @@ const pool = new Pool({
 // }
 
 const getSidebarById = (id, cb) => {
-  pool.query('SELECT * FROM sidebar where id = $1', [id], (error, results) => {
+  pool.query('SELECT * FROM sidebar where _id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -80,7 +80,7 @@ const getSidebarById = (id, cb) => {
 // }
 
 const getOverviewById = (id, cb) => {
-  pool.query('SELECT * FROM overview where id = $1', [id],(error, results) => {
+  pool.query('SELECT * FROM overview where _id = $1', [id],(error, results) => {
     if (error) {
       throw error
     }

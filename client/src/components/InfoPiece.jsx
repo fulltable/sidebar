@@ -5,7 +5,7 @@ const InfoPiece = ({ title, value }) => {
   const titleStrings = {
     address: '',
     neighborhood: 'Neighborhood',
-    crossStreet: 'Cross street',
+    crossStreet: 'Cross Street',
     parking: 'Parking details',
     dining: 'Dining Style',
     cuisines: 'Cuisines',

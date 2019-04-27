@@ -8,7 +8,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  console.log('Cool')
   res.status(200).send('Cool! You connect to AWS EC2')
 })
 

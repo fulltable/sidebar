@@ -62,7 +62,7 @@ class App extends React.Component {
   }
 
   render() {
-    const infoKeys = Object.keys(this.state).filter(key => this.state[key] && key !== 'restaurantId' && key !== 'restaurantLoaded' && key !== 'address')
+    const infoKeys = Object.keys(this.state).filter(key => this.state[key] && key !== 'restaurantId' && key !== 'restaurantLoaded' && key !== 'address' && key !== 'restaurantid')
     let reactKey = 0;
     const infoComponents = infoKeys.map(key => {
       reactKey += 1;
