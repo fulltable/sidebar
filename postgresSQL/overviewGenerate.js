@@ -30,7 +30,7 @@ const populateOverview = (num) => {
    return data.join('@') + '\n'
  }
 
-function writeOneMillionTimes(writer, data, encoding, callback, n) {
+function writeTenMillionTimes(writer, data, encoding, callback, n) {
  var i = n;
  write();
  function write() {
@@ -55,5 +55,5 @@ function writeOneMillionTimes(writer, data, encoding, callback, n) {
  }
 }
 
-writeOneMillionTimes(ws, populateOverview, 'UTF-8' ,(result)=>console.log(result), 101);
+writeTenMillionTimes(ws, populateOverview, 'UTF-8' ,(result)=>console.log(result), 10000001);
 

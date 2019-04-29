@@ -52,7 +52,7 @@ const populateItems = (num) => {
 //   setTimeout(() => {populateItems(i)}, 10000)
 // }
 
-function writeOneMillionTimes(writer, data, encoding, callback, n) {
+function writeTenMillionTimes(writer, data, encoding, callback, n) {
   var i = n;
   write();
   function write() {
@@ -77,5 +77,5 @@ function writeOneMillionTimes(writer, data, encoding, callback, n) {
   }
 }
 
-writeOneMillionTimes(ws, populateItems, 'UTF-8' ,(result)=>console.log(result), 101);
+writeTenMillionTimes(ws, populateItems, 'UTF-8' ,(result)=>console.log(result), 101);
 
