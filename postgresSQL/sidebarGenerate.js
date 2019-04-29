@@ -1,15 +1,11 @@
 const faker = require('faker');
 const fs = require('fs');
-const fastcsv = require('fast-csv'); 
 const ws = fs.createWriteStream("sidebar.csv"); 
-const createCsvWriter = require('csv-writer').createObjectCsvWriter;  
 
 const populateItems = (num) => {
   const randRange = (min, max) => (Math.floor(Math.random() * (max + 1 - min)) + min);
   // for (let restaurantId = 1; restaurantId <= 100000; restaurantId += 1) {
     let newItem = {};
-    newItem._id = num;
-    newItem.restaurantId = num;
     newItem.address = [faker.address.streetAddress(), faker.address.city(), faker.address.stateAbbr()].join(' ');
     if (randRange(0, 2) === 2) {
       newItem.catering = faker.lorem.sentences();
@@ -38,6 +34,7 @@ const populateItems = (num) => {
       newItem.privateFacilities = 'N/A'
     }
     newItem.website = faker.internet.url();
+    // newItem._id = num;
 
     // return data
     data = [];

@@ -16,22 +16,15 @@
     "db:setup": "node database/seed.js"
   },
   "dependencies": {
-    "artillery": "^1.6.0-27",
-    "async": "^2.6.2",
     "axios": "^0.18.0",
-    "cassandra-driver": "^4.0.0",
+    "cluster": "^0.7.7",
     "cors": "^2.8.5",
-    "csv-parser": "^2.2.0",
-    "csv-writer": "^1.2.0",
     "express": "^4.16.4",
-    "fast-csv": "^2.4.1",
-    "file-system": "^2.2.2",
+    "express-http-context": "^1.2.1",
     "mongoose": "^5.4.21",
-    "mysql2": "^1.6.5",
-    "nodemon": "^1.18.11",
-    "performance-now": "^2.1.0",
-    "pg": "^7.10.0",
-    "promise-mysql": "^3.3.1"
+    "newrelic": "^5.7.0",
+    "os": "^0.1.1",
+    "pg": "^7.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -47,7 +40,6 @@
     "jest": "^24.5.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "supertest": "^4.0.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   }

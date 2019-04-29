@@ -1,12 +1,19 @@
 config:
-  target: 'http://localhost:3000'
+  target: 'http://localhost:3003'
   phases:
     - duration: 30
-      arrivalRate: 550
+      arrivalRate: 150
   processor: "./stressFunction.js"
 scenarios:
   - flow:
     - function: "generateRandomData"
     - get:
-        url: "/api/overview/{{resturant_id}}"
+        url: "/api/info"
+    # - get:
+    #     url: "/restaurants/{{resturant_id}}"
+    # - get:
+    #     url: "/api/restaurants/{{resturant_id}}/info"
+    # - get:
+    #     url: "/api/restaurants/{{resturant_id}}/overview"
+
     # - log: "Send a request to /sidebar with id {{ resturant_id }}"
