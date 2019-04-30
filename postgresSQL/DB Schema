@@ -1,29 +1,33 @@
 CREATE Table IF NOT EXISTS sidebar (
-  ID SERIAL PRIMARY KEY,
-  restaurantId Int, 
+  _id SERIAL PRIMARY KEY,
   address VARCHAR,
   catering VARCHAR,
   chef VARCHAR,
-  crossStreet VARCHAR(160),
+  "crossStreet" VARCHAR(160),
   cuisines VARCHAR(40),
-  dinning VARCHAR(150),
+  dining VARCHAR(150),
   dress VARCHAR(40),
   hours VARCHAR(40),
   neighborhood VARCHAR(145),
   parking VARCHAR,
   payment VARCHAR(40),
   phone VARCHAR(40),
-  privateFacilities VARCHAR,
+  "privateFacilities" VARCHAR,
   website VARCHAR(40)
 );
 
 CREATE TABLE overview ( 
-  ID SERIAL PRIMARY KEY, 
-  restaurantId Int, 
-  costRange VARCHAR, 
+  _id SERIAL PRIMARY KEY, 
+  "costRange" VARCHAR, 
   description VARCHAR, 
   name VARCHAR, 
   rating VARCHAR, 
-  reviewCount VARCHAR, 
+  "reviewCount" VARCHAR, 
   tags VARCHAR
 );
+
+address, catering, chef, "crossStreet", cuisines, dining, dress, hours, neighborhood, parking, payment, phone, "privateFacilities", website
+
+\copy sidebar from '~/sidebar/sidebar.csv' WITH DELIMITER '@';
+
+"costRange", description, name, rating, "reviewCount", tags
