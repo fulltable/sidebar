@@ -1,9 +1,21 @@
 const Pool = require('pg').Pool
+// const pool = new Pool({
+//   user: 'postgres',
+//   password: 'a81884855',
+//   host: 'localhost',
+//   database: 'postgres',
+//   port: 5432,
+//   agent: false
+// })
+
+const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'garyguan',
-  host: 'localhost',
-  database: 'postgres',
+  user: 'postgres',
+  host: 'ec2-13-57-188-124.us-west-1.compute.amazonaws.com',
+  database: 'sidebar',
+  password: 'a81884855',
   port: 5432,
+  agent: false
 })
 
 // const createTable = (cb) => {
@@ -35,15 +47,25 @@ const getSidebarById = (id, cb) => {
   })
 }
 
-// const createSidebar = (req, cb) => {
-//   const { address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities } = req
-//   pool.query('INSERT INTO sidebar (address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)', [address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities], (error, results) => {
-//     if (error) {
-//       throw error
-//     }
-//     cb('success');
-//   })
-// }
+const createSidebar = (data, cb) => {
+  const { name, address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities, costRange, description, rating, reviewCount, tags } = data
+  pool.query('INSERT INTO restaurant (name) VALUES ($1)', [ name ], (error, results) => {
+    if (error) {
+      throw error
+    }
+      pool.query('INSERT INTO sidebar (address, neighborhood, "crossStreet", parking, dining, cuisines, hours, phone, website, payment, dress, chef, catering, "privateFacilities") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)', [address, neighborhood, crossStreet, parking, dinning, cuisines, hours, phone, website, payment, dress, chef, catering, privateFacilities], (error, results) => {
+        if (error) {
+          throw error
+        }
+        pool.query('INSERT INTO overview ("costRange", description, name, rating, "reviewCount", tags, cuisine) VALUES ($1, $2, $3, $4, $5, $6, $7)', [ costRange, description, name, rating, reviewCount, tags, cuisines ], (error, results) => {
+          if (error) {
+            throw error
+          }
+          cb('success');
+      });
+    });
+  });
+}
 
 // const updateSidebar = (req, cb) => {
 //   const id = parseInt(req.params.id)
@@ -60,14 +82,14 @@ const getSidebarById = (id, cb) => {
 //   )
 // }
 
-// const deleteSidebar = (id, cb) => {
-//   pool.query('DELETE FROM sidebar WHERE id = $1', [id], (error, results) => {
-//     if (error) {
-//       throw error
-//     }
-//     cb(`User deleted with ID: ${id}`)
-//   })
-// }
+const deleteRestaurant = (id, cb) => {
+  pool.query('DELETE FROM restaurant WHERE id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    cb(`User deleted with ID: ${id}`)
+  })
+}
 
 const getOverviewById = (id, cb) => {
   pool.query('SELECT * FROM overview where _id = $1', [id],(error, results) => {
@@ -116,9 +138,9 @@ const getOverviewById = (id, cb) => {
 
 module.exports = {
   getSidebarById,
-  // createSidebar,
+  createSidebar,
   // updateSidebar,
-  // deleteSidebar,
+  deleteRestaurant,
   getOverviewById,
   // createOverview,
   // updateOverview,

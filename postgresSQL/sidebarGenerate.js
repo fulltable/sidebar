@@ -78,4 +78,3 @@ function writeTenMillionTimes(writer, data, encoding, callback, n) {
 }
 
 writeTenMillionTimes(ws, populateItems, 'UTF-8' ,(result)=>console.log(result), 101);
-

@@ -16,10 +16,15 @@
     "db:setup": "node database/seed.js"
   },
   "dependencies": {
-    "artillery": "^1.6.0-27",
     "axios": "^0.18.0",
+    "cluster": "^0.7.7",
     "cors": "^2.8.5",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "express-http-context": "^1.2.1",
+    "mongoose": "^5.4.21",
+    "newrelic": "^5.7.0",
+    "os": "^0.1.1",
+    "pg": "^7.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
