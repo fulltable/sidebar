@@ -1,21 +1,19 @@
 const Pool = require('pg').Pool
+const pool = new Pool({
+  user: 'garyguan',
+  host: 'localhost',
+  database: 'postgres',
+  port: 5432,
+})
+
 // const pool = new Pool({
 //   user: 'postgres',
-//   password: 'a81884855',
 //   host: 'localhost',
-//   database: 'postgres',
+//   database: 'sidebar',
+//   password: 'a81884855',
 //   port: 5432,
 //   agent: false
 // })
-
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'sidebar',
-  password: 'a81884855',
-  port: 5432,
-  agent: false
-})
 
 // const createTable = (cb) => {
 //   pool.query(

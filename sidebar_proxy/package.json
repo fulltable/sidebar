@@ -23,8 +23,10 @@
     "express-http-context": "^1.2.1",
     "mongoose": "^5.4.21",
     "newrelic": "^5.7.0",
+    "node-fetch": "^2.5.0",
     "os": "^0.1.1",
-    "pg": "^7.10.0"
+    "pg": "^7.10.0",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

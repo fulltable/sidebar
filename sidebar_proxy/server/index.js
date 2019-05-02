@@ -12,7 +12,12 @@ const db = require('../database/queries');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/restaurants/:id', express.static(path.join(__dirname, '/../public/')));
+
+app.use('/restaurants/:id', express.static(path.join(__dirname, '../public')));
+
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.resolve(__dirname, '../public/staticmap.jpg'));
+})
 
 app.get('/api/restaurants/:id/info', (req, res) => {
   db.getSidebarById(req.params.id, (data) => {
@@ -38,7 +43,7 @@ app.get('/api/restaurants/:id/overview', (req, res) => {
     data[0].costRange = JSON.parse(data[0].costRange);
     data[0].tags = JSON.parse(data[0].tags);
     data[0].cuisine = data[0].cuisine.split(',')[0]
-    res.status(200).send(data[0]);
+    res.status(200).json(data[0]);
  });
 })
 
