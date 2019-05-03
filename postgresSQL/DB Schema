@@ -31,3 +31,12 @@ address, catering, chef, "crossStreet", cuisines, dining, dress, hours, neighbor
 \copy sidebar from '~/sidebar/sidebar.csv' WITH DELIMITER '@';
 
 "costRange", description, name, rating, "reviewCount", tags
+
+update table overview(cuisine)
+select cuisines from sidebar where sidebar._id = overview._id;
+
+alter table overview 
+add constraint overview_restaurant_overviewid
+foreign key (_id)
+references restaurant(id)
+on delete cascade;

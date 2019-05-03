@@ -2,17 +2,17 @@ config:
   target: 'http://localhost:3003'
   phases:
     - duration: 30
-      arrivalRate: 150
+      arrivalRate: 1500
   processor: "./stressFunction.js"
 scenarios:
   - flow:
     - function: "generateRandomData"
-    - get:
-        url: "/api/info"
+    # - get:
+    #     url: "/api/info"
     # - get:
     #     url: "/restaurants/{{resturant_id}}"
-    # - get:
-    #     url: "/api/restaurants/{{resturant_id}}/info"
+    - get:
+        url: "/api/restaurants/{{resturant_id}}/info"
     # - get:
     #     url: "/api/restaurants/{{resturant_id}}/overview"
 

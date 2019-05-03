@@ -55,5 +55,5 @@ function writeTenMillionTimes(writer, data, encoding, callback, n) {
  }
 }
 
-writeTenMillionTimes(ws, populateOverview, 'UTF-8' ,(result)=>console.log(result), 10000001);
+writeTenMillionTimes(ws, populateOverview, 'UTF-8' ,(result)=>console.log(result), 101);
 
