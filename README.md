@@ -3,7 +3,7 @@
 > The sidebar module for the 6 Full Table Project. The sidebar module shows the important information for each restaurant (e.g. hours, dress code, cuisines, neighborhood, etc.). There is a map with address on top, when clicked it will open a new tab with Google Maps and the
 specific address.
 
-## Last Result
+## Final Result
 
 - Response per Minute: 119509
 - Err Rate: 0.2%
