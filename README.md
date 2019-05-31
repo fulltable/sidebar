@@ -9,6 +9,8 @@ specific address.
 - Err Rate: 0.2%
 - Response Time: 160ms
 
+![alt text](https://i.imgur.com/tM7cjD6.png)
+
 ## CRUD API
 The sidebar module has the following functions:
 
