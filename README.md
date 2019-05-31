@@ -5,9 +5,9 @@ specific address.
 
 ## Last Result
 
-Response per Minute: 119509
-Err Rate: 0.2%
-Response Time: 160ms
+- Response per Minute: 119509
+- Err Rate: 0.2%
+- Response Time: 160ms
 
 ## CRUD API
 The sidebar module has the following functions:
